@@ -1,0 +1,185 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{4CD081EC-7E28-4152-B1DD-343602FD640F}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <StartupObject>Sub Main</StartupObject>
+    <RootNamespace>Softwarekueche.Dvd4Sarah</RootNamespace>
+    <AssemblyName>Dvd4Sarah</AssemblyName>
+    <MyType>WindowsFormsWithCustomSubMain</MyType>
+    <OptionStrict>On</OptionStrict>
+    <ApplicationIcon>Dvd4Sarah.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\</OutputPath>
+    <DocumentationFile>Dvd4Sarah.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>..\Release\</OutputPath>
+    <DocumentationFile>Dvd4Sarah.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="db4o, Version=5.2.2.0, Culture=neutral, PublicKeyToken=6199cd4f203aa8eb, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\libs\db4o.dll</HintPath>
+    </Reference>
+    <Reference Include="db4o-net-tools, Version=4.6.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\libs\db4o-net-tools.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetUC.Forms, Version=0.1.0.0, Culture=neutral, PublicKeyToken=9bd6653d13cff932, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\libs\DotNetUC.Forms.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetUC.Validation, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\libs\DotNetUC.Validation.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.9.0, Culture=neutral, PublicKeyToken=b32731d11ce58905">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\libs\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Drawing" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Windows.Forms" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Hauptformular.Designer.vb">
+      <DependentUpon>Hauptformular.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Hauptformular.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Start.vb" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Hauptformular.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>Hauptformular.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\DataSources\Softwarekueche.Dvd4Sarah.BusinessObjects.Dvd.datasource" />
+    <None Include="My Project\DataSources\Softwarekueche.Dvd4Sarah.BusinessObjects.Owner.datasource" />
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Basisklassen\Basisklassen.vbproj">
+      <Project>{E9E28EB1-F3E1-4725-87FA-66B7B3DBD920}</Project>
+      <Name>Basisklassen</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BusinessObjects\BusinessObjects.vbproj">
+      <Project>{38404073-C908-46EE-B751-9836D9F0D0A9}</Project>
+      <Name>BusinessObjects</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Controls\Controls.vbproj">
+      <Project>{629D79BF-5E90-4211-8A8B-F2D9E993C221}</Project>
+      <Name>Controls</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Validation\Validation.vbproj">
+      <Project>{0E4AA9BA-93C2-4763-8398-D7F02379DA5B}</Project>
+      <Name>Validation</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\GenreList.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Fsk18.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FskList.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\OwnerList.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DvdList.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Fsk0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Fsk6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Fsk12.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Fsk16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Dvd4Sarah.ico" />
+    <None Include="Resources\VerleihList.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <PropertyGroup>
+    <PostBuildEvent>copy $(SolutionDir)\MessageDialog.csv $(TargetDir)</PostBuildEvent>
+  </PropertyGroup>
+</Project>

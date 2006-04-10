@@ -1,0 +1,4 @@
+1;Soll die DVD '%1' gelöscht werden?;Löschen;YesNo;Question;Button2;ServiceNotification
+2;Soll die Person '%1' gelöscht werden?;Löschen;YesNo;Question;Button2;ServiceNotification
+3;Soll die FSK Einstufung '%1' gelöscht werden?;Löschen;YesNo;Question;Button2;ServiceNotification
+4;Soll das Genre '%1' gelöscht werden?;Löschen;YesNo;Question;Button2;ServiceNotification

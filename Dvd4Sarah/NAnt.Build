@@ -1,0 +1,242 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<project xmlns="http://nant.sourceforge.net/release/0.85-rc3/nant.xsd"
+         name="Dvd4Sarah"
+         default="build">
+
+    <!--~~~~~~~~~~~~~~~~~
+         Konfiguration
+      ~~~~~~~~~~~~~~~~~-->
+    <!-- NAnt Konfiguration -->
+    <property name="nant.settings.currentframework" value="net-2.0" />
+
+    <!-- Externe Tasks laden -->
+    <loadtasks assembly="libs\DotNetUC.NAnt.Functions.dll" />
+
+    <!-- Systemkonfiguration -->
+    <property name="sysWinDir"     value="${environment::get-variable('SystemRoot')}"/>
+    <property name="sysProgDir"    value="${environment::get-variable('ProgramFiles')}"/>
+
+    <!-- Externe Tools -->
+    <property name="msbuild"
+              value="${sysWinDir}\Microsoft.NET\Framework\v2.0.50727\msbuild.exe" />
+    <property name="fxcop"
+              value="${sysProgDir}\Microsoft FxCop 1.35\fxcopcmd.exe" />
+    <property name="nunit"
+              value="${sysProgDir}\NUnit-Net-2.0 2.2.6\bin\nunit-console.exe" />
+    <property name="ncover"
+              value="${sysProgDir}\NCover\ncover.console.exe" />
+
+    <!-- Parameter für die weitere Verwendung -->
+    <property name="author"      value="Thomas Mentzel"/>
+    <property name="root"        value="${nant.project.basedir}"/>
+    <property name="outname"     value="${nant.project.name}"/>
+    <property name="projectname" value="${nant.project.name}"/>
+    <property name="debugdir"    value="${root}\${nant.project.name}\bin"/>
+    <property name="releasedir"  value="${root}\Release"/>
+    <property name="setupdir"    value="${root}\Setup"/>
+    <property name="packagedir"  value="${root}\..\Pakete"/>
+
+    <property name="shortdate"   value="${softwarekueche::buildDate()}" />
+    <property name="shorttime"   value="${softwarekueche::buildTime()}" />
+
+    <if test="${not property::exists('CCNetLabel')}">
+        <property name="CCNetLabel"  value="${shortdate}${shorttime}" />
+    </if>
+    <property name="ccnet.label"  value="${CCNetLabel}" />
+
+
+    <include buildfile="Setup\Setup.Build" />
+
+    <!--~~~~~~~~~~~~~~~~~
+         Default Targets 
+      ~~~~~~~~~~~~~~~~~-->
+
+    <!-- Target für "Erstellen" -->
+    <target name="build" description="Erstellen des gesamten Projektes">
+        <call target="sets" />
+        <call target="cleanDebug" />
+        <call target="cleanRelease" />
+
+        <call target="msbuild" />
+        <!--<call target="nunit" />-->
+        <!--<call target="ncovernunit" />-->
+        <call target="doc-sdk"/>
+        <call target="releaseFiles" />
+        <call target="cleanDebug" />
+        <call target="msisetup" />
+        <call target="package" />
+        <call target="cleanRelease" />
+    </target>
+
+    <target name="msisetupWrapper" description="Wrapper für MSI Setup">
+        <call target="msisetup" />
+    </target>
+
+    <!--~~~~~~~~~~~~~
+         Sub-Targets 
+      ~~~~~~~~~~~~~-->
+
+    <target name="clean" description="Bereinigen des Solution Verzeichnisses">
+        <call target="cleanDebug" />
+        <call target="cleanRelease" />
+    </target>
+
+    <!-- Ausgeben von Parametern -->
+    <target name="sets" description="Parameterausgabe">
+        <echo message="Windows: ${sysWinDir}" />
+        <echo message="Programme: ${sysProgDir}" />
+    </target>
+
+    <!-- Aufrufen von MSBuild zum erstellen von Debug und Release -->
+    <target name="msbuild" description="Aufrufen des MSBuild Prozesses">
+        <exec program="${msbuild}"
+              workingdir="${root}">
+            <!--<arg value="/noconsolelogger" />-->
+            <arg value="/p:Configuration=Debug" />
+            <!--<arg value="/v:diag" />-->
+        </exec>
+
+        <exec program="${msbuild}"
+              workingdir="${root}">
+            <!--<arg value="/noconsolelogger" />-->
+            <arg value="/p:Configuration=Release" />
+            <!--<arg value="/v:diag" />-->
+        </exec>
+    </target>
+
+    <!-- Aufrufen von NUnit und NCover (Wrapper)-->
+    <target name="nunit" description="Aufrufen von NUnit">
+        <exec program="${nunit}"
+              workingdir="${root}">
+            <arg value="${releasedir}\Tests.NUnit.dll" />
+            <arg value="/xml=${releasedir}\nunit.xml" />
+            <arg value="/nologo" />
+        </exec>
+    </target>
+
+    <!-- Aufrufen von NUnit und NCover -->
+    <target name="ncovernunit" description="Aufrufen von NCover mit NUnit">
+        <exec program="${ncover}"
+              workingdir="${root}">
+            <arg value="//l &quot;${releasedir}\ncover.log&quot;" />
+            <arg value="//x &quot;${releasedir}\ncover.xml&quot;" />
+            <arg value="&quot;${nunit}&quot; &quot;&quot;&quot;${releasedir}\Tests.NUnit.dll&quot;&quot;&quot; &quot;&quot;&quot;/xml=${releasedir}\nunit.xml&quot;&quot;&quot; /nologo" />
+        </exec>
+    </target>
+
+    <!-- Verschiedene Dateien veröffentlichen -->
+    <target name="releaseFiles" description="Verschiedene Dateien veröffenltichen">
+        <copy   file="${root}\Doc\MSDN\${outname}-SDK.chm" todir="${releasedir}" />
+        <copy   file="${setupdir}\Handbuch.chm" todir="${releasedir}" />
+        <copy   file="${root}\MessageDialog.csv" todir="${releasedir}" />
+        <delete file="${releasedir}\Dvd4Sarah.exe.config" />
+        <copy   file="${root}\Dvd4Sarah.exe.config" todir="${releasedir}" />
+    </target>
+
+    <!-- Erstellen eines Paketes mit den notwenigen Dateien -->
+    <target name="package" description="Erstellen des Paketes">
+        <mkdir dir="${packagedir}" />
+        <zip zipfile="${packagedir}\${outname}-${ccnet.label}.zip">
+
+            <fileset basedir="${releasedir}" prefix="bin">
+                <include name="*.exe" />
+                <include name="*.dll" />
+                <include name="*.config" />
+                <exclude name="Tests.*" />
+            </fileset>
+
+            <fileset basedir="${releasedir}" prefix="doc">
+                <include name="*.chm" />
+                <include name="*.doc" />
+            </fileset>
+
+            <fileset basedir="${releasedir}" prefix="out">
+                <include name="*.xml" />
+                <include name="*.log" />
+                <include name="Tests.*" />
+            </fileset>
+
+            <fileset basedir="${root}" prefix="src">
+                <include name="*.*" />
+
+                <include name="Beispiel/**/*" />
+                <include name="Bilder/**/*" />
+                <include name="libs/**/*" />
+                <include name="Homepage/**/*" />
+                <include name="Setup/**/*" />
+
+                <include name="Basisklassen/**/*" />
+                <include name="BusinessObjects/**/*" />
+                <include name="Dvd4Sarah/**/*" />
+                <include name="Controls/**/*" />
+                <include name="Tests.NUnit/**/*" />
+                <include name="Validation/**/*" />
+            </fileset>
+
+            <fileset basedir="${releasedir}">
+                <include name="*.txt" />
+                <include name="*.msi" />
+            </fileset>
+        </zip>
+    </target>
+
+    <!-- Bereinigen -->
+    <target name="cleanDebug" description="Reinigen der Verzeichnisse">
+        <foreach item="Folder" in="${root}" property="dirname">
+            <delete dir="${dirname}\bin" />
+            <delete dir="${dirname}\obj" />
+        </foreach>
+    </target>
+
+    <!-- Bereinigen -->
+    <target name="cleanRelease" description="Reinigen der Verzeichnisse">
+        <delete dir="${root}\Doc" />
+        <delete>
+            <fileset basedir="${releasedir}">
+                <include name="*.*" />
+                <exclude name="db4o*" />
+            </fileset>
+        </delete>
+    </target>
+
+    <!-- Erstellen der Programmierdokumentation -->
+    <target name="doc-sdk" description="Erstellen der SDK-Dokumentation">
+        <ndoc>
+            <assemblies basedir="${releasedir}">
+                <include name="BusinessObjects.dll" />
+                <include name="Dvd4Sarah.exe" />
+                <include name="Dvd4Sarah.Controls.dll" />
+                <include name="Dvd4Sarah.Validation.dll" />
+                <include name="Tests.NUnit.dll" />
+            </assemblies>
+            <summaries basedir="${root}">
+                <include name="NamespaceSummaries.xml" />
+            </summaries>
+            <documenters>
+                <documenter name="MSDN">
+                    <property name="OutputDirectory" value="${root}\Doc\MSDN" />
+                    <property name="HtmlHelpName" value="${outname}-SDK.chm" />
+                    <property name="HtmlHelpCompilerFilename" value="hhc.exe" />
+                    <property name="IncludeFavorites" value="False" />
+                    <property name="Title" value="${projectname} SDK Dokumentation" />
+                    <property name="SplitTOCs" value="False" />
+                    <property name="DefaulTOC" value="" />
+                    <property name="ShowVisualBasic" value="True" />
+                    <property name="ShowMissingSummaries" value="True" />
+                    <property name="ShowMissingRemarks" value="True" />
+                    <property name="ShowMissingParams" value="True" />
+                    <property name="ShowMissingReturns" value="True" />
+                    <property name="ShowMissingValues" value="True" />
+                    <property name="DocumentInternals" value="False" />
+                    <property name="DocumentProtected" value="True" />
+                    <property name="DocumentPrivates" value="True" />
+                    <property name="DocumentEmptyNamespaces" value="True" />
+                    <property name="IncludeAssemblyVersion" value="True" />
+                    <property name="CopyrightText" value="(c) 2006 Unilog - Avinci" />
+                    <property name="CopyrightHref" value="http://www.unilog.de" />
+                </documenter>
+            </documenters>
+        </ndoc>
+    </target>
+
+</project>

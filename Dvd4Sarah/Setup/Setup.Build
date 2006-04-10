@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project xmlns="http://nant.sourceforge.net/release/0.85-rc3/nant.xsd">
+
+    <property name="install.name"     value="${nant.project.name}" />
+    <property name="install.author"   value="${author}" />
+    <property name="install.version"  value="${ccnet.label}" />
+    <property name="install.samples"  value="${root}\Beispiel" />
+    <property name="install.images"   value="${root}\Bilder" />
+
+    <property name="install.fullname" value="DVD Manager für Sarah" />
+    <property name="install.company"  value="Softwarekueche" />
+    <property name="install.comment"  value="Installationsprogramm für den DVD Manager für Sarah" />
+    <property name="install.keywords" value="DVD, Manager, Sarah, Dvd4Sarah" />
+
+    <target name="msisetup" Description="Erstellen des Setup">
+
+        <msi output="${releasedir}\${install.name}-${install.version}.msi" 
+             sourcedir="${releasedir}" 
+             license="${setupdir}\Lizenz.rtf">
+
+            <summaryinformation>
+                <title>${install.name} Setup</title>
+                <subject>${install.name}</subject>
+                <author>${install.author}</author>
+                <keywords>${install.keywords}</keywords>
+                <comments>${install.comment}</comments>
+                <template>;1031</template>
+                <creatingapplication>NAnt - http://nant.sf.net </creatingapplication>
+            </summaryinformation>
+
+            <properties>
+                <property name="ProductName" value="${install.name}" />
+                <property name="ProductVersion" value="${install.version}" />
+                <property name="Manufacturer" value="${install.company}" />
+                <property name="ProductCode" value="{29D8F096-3371-4cba-87E1-A8C6511F7B4C}" />
+                <property name="UpgradeCode" value="{69E66919-0DE1-4280-B4C1-94049F76BA1A}" />
+            </properties>
+
+            <!--<search>
+                <registry type="registry" path="SOFTWARE\Microsoft\.NETFramework\v2.0.50727" root="machine" >
+                    <value name="PathNet20" setproperty="NET20WWWROOT" />
+                </registry>
+            </search>-->
+
+            <!--<launchconditions>
+
+                <launchcondition name="Net20" condition="">
+                    <description>Die Anwendung benötigt das .NET Framework 2.0</description>
+                </launchcondition>
+
+            </launchconditions>-->
+
+            <directories>
+
+                <directory name="D_Main" foldername="${install.company}" root="ProgramFilesFolder" >
+                    <directory name="D_Dvd4Sarah" foldername="${install.name}">
+                        <directory name="D_Samples" foldername="Beispiele" />
+                        <directory name="D_Images" foldername="Bilder">
+                            <directory name="D_ImagesFilme" foldername="Filme" />
+                        </directory>
+                        <directory name="D_Doc" foldername="Dokumentation" />
+                    </directory>
+                </directory>
+
+                <directory name="D_StartMenu" foldername="Dvd4Sarah" root="ProgramMenuFolder">
+                    <directory name="D_StartMenuTool" foldername="Tools" />
+                </directory>
+
+                <directory name="D_System32" foldername="System32" root="WindowsFolder" />
+
+            </directories>
+
+            <components>
+
+                <component name="C_Main" id="{26AA7144-E683-441D-9843-3C79AEC1C636}" 
+                           attr="0" directory="D_Dvd4Sarah" feature="F_Main">
+                    <key file="Dvd4Sarah.exe" />
+                    <fileset basedir="${releasedir}">
+                        <include name="*.exe" />
+                        <include name="*.dll" />
+                        <include name="*.config" />
+                        <include name="${install.images}\Dvd4Sarah.ico" />
+                        <exclude name="Tests.*" />
+                    </fileset>
+                </component>
+
+                <component name="C_Samples" id="{26AA7144-E683-441D-9843-3C79AEC1C637}" 
+                           attr="12" directory="D_Samples" feature="F_Samples">
+                    <key file="" />
+                    <fileset basedir="${install.samples}">
+                        <include name="*.Dvd4Sarah" />
+                    </fileset>
+                </component>
+
+                <component name="C_Images" id="{26AA7144-E683-441D-9843-3C79AEC1C638}" 
+                           attr="12" directory="D_Images" feature="F_Images">
+                    <key file="" />
+                    <fileset basedir="${install.images}">
+                        <include name="*.gif" />
+                        <include name="*.jpg" />
+                        <include name="*.png" />
+                    </fileset>
+                </component>
+
+                <component name="C_ImagesFilme" id="{26AA7144-E683-441D-9843-3C79AEC1C640}" 
+                           attr="12" directory="D_ImagesFilme" feature="F_ImagesFilme">
+                    <key file="" />
+                    <fileset basedir="${install.images}\Filme">
+                        <include name="*.gif" />
+                        <include name="*.jpg" />
+                        <include name="*.png" />
+                    </fileset>
+                </component>
+
+                <component name="C_Doc" id="{26AA7144-E683-441D-9843-3C79AEC1C639}" 
+                           attr="12" directory="D_Doc" feature="F_Doc">
+                    <key file="" />
+                    <fileset basedir="${releasedir}">
+                        <include name="${outname}-SDK.chm" />
+                        <include name="${setupdir}\Handbuch.chm" />
+                    </fileset>
+                </component>
+
+            </components>
+
+            <registry>
+                <key component="C_Main" root="classes" path=".Dvd4Sarah" >
+                    <value name="" value="Dvd4Sarah.Database" />
+                </key>
+                <key component="C_Main" root="classes" path="Dvd4Sarah.Database" >
+                    <value name="" value="DVD Datenbank (Dvd4Sarah)" />
+                </key>
+                <key component="C_Main" root="classes" path="Dvd4Sarah.Database\DefaultIcon" >
+                    <value name="" value="[$C_Main]\Dvd4Sarah.exe,0" />
+                </key>
+                <key component="C_Main" root="classes" path="Dvd4Sarah.Database\shell\open\command" >
+                    <value name="" value="[$C_Main]\Dvd4Sarah.exe --file &quot;%1&quot;" />
+                </key>
+            </registry>
+
+            <icons>
+                <icon name="I_Main" value="${install.images}\Dvd4Sarah.ico" />
+            </icons>
+
+            <shortcuts>
+
+                <shortcut name="SdkDoc" 
+                        directory="D_StartMenuTool"
+                        filename="SDK Dokumentation" 
+                        component="C_Doc" 
+                        target="[$C_Doc]\${outname}-SDK.chm">
+                    <description>Quellcodedokumentation</description>
+                </shortcut>
+
+                <shortcut name="Dvd4Sarah" 
+                          directory="D_StartMenu"
+                          filename="${install.name}" 
+                          component="C_Main" 
+                          target="[$C_Main]\Dvd4Sarah.exe" 
+                          icon="I_Main">
+                    <description>Dvd4Sarah starten</description>
+                </shortcut>
+
+                <shortcut name="ManualDoc" 
+                          directory="D_StartMenu"
+                          filename="Handbuch" 
+                          component="C_Doc" 
+                          target="[$C_Doc]\Handbuch.chm">
+                    <description>Dokumentation des Quellcodes</description>
+                </shortcut>
+
+                <shortcut name="UnInstall" 
+                        directory="D_StartMenu"
+                        component="C_Main" 
+                        filename="UnInstall" 
+                        target="[WindowsFolder]\System32\msiexec.exe"
+                        arguments="/uninstall [ProductCode]">
+                    <description>Dvd4Sarah deinstallieren</description>
+                </shortcut>
+
+            </shortcuts>
+
+            <features>
+
+                <feature name="F_Main"    display="1" directory="D_Dvd4Sarah" 
+                         title="Dvd4Sarah" attr="28" typical="true">
+                    <description>DVD4Sarah Anwendung</description>
+
+                    <feature name="F_Images" display="3" directory="D_Images" 
+                             title="Bilder" attr="0" typical="true">
+                        <description>Bilder</description>
+
+                        <feature name="F_ImagesFilme" display="3" directory="D_ImagesFilme" 
+                                 title="Filmposter" attr="0" typical="true">
+                            <description>Amazon Filmposter</description>
+                        </feature>
+
+                    </feature>
+
+                    <feature name="F_Samples" display="2" directory="D_Samples" 
+                             title="Beispiele" attr="12" typical="false">
+                        <description>Beispiel DVD Datenbank</description>
+                    </feature>
+
+                    <feature name="F_Doc" display="2" directory="D_Doc" 
+                             title="Dokumentation" attr="12" typical="true">
+                        <description>Dokumentation, Handbuch usw.</description>
+                    </feature>
+
+                </feature>
+
+            </features>
+
+        </msi>
+
+    </target>
+
+</project>

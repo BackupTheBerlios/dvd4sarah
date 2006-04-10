@@ -1,0 +1,82 @@
+<project name="Dvd4Sarah">
+
+    <workingDirectory>C:\Projekte\SieSaSo\Dvd4Sarah</workingDirectory>
+    <artifactDirectory>C:\Projekte\SieSaSo\Dvd4Sarah\Artifacts</artifactDirectory>
+    <webURL>http://10.216.242.11:8080/ccnet/</webURL>
+
+    <labeller type="defaultlabeller">
+        <!-- [Programmversion].[Featurezusatz].[Buglevel]-[CCNet Build] -->
+        <prefix>0.0.0-</prefix>
+        <incrementOnFailure>true</incrementOnFailure>
+    </labeller>
+
+    <tasks>
+
+        <email from="CruiseControl &lt;Thomas.Ley@Unilog.de&gt;" mailhost="su001" includeDetails="true">
+            <users>
+                <user name="Thomas Ley" group="BuildMaster" address="thomas.ley@unilog.de"/>
+            </users>
+            <groups>
+                <group name="BuildMaster" notification="always"/>
+            </groups>
+        </email>
+
+        <msbuild>
+            <executable>C:\WINNT\Microsoft.NET\Framework\v2.0.50727\msbuild.exe</executable>
+            <buildArgs>/noconsolelogger /p:Configuration=Debug /v:diag</buildArgs>
+            <logger>ThoughtWorks.CruiseControl.MsBuild.XmlLogger,C:\Projekte\Tools\ThoughtWorks.CruiseControl.MsBuild.dll</logger>
+            <timeout>300</timeout>
+        </msbuild>
+
+        <msbuild>
+            <executable>C:\WINNT\Microsoft.NET\Framework\v2.0.50727\msbuild.exe</executable>
+            <buildArgs>/noconsolelogger /p:Configuration=Release /v:diag</buildArgs>
+            <logger>ThoughtWorks.CruiseControl.MsBuild.XmlLogger,C:\Projekte\Tools\ThoughtWorks.CruiseControl.MsBuild.dll</logger>
+            <timeout>300</timeout>
+        </msbuild>
+
+        <nant>
+            <executable>C:\Programme\nant-0.85-nightly-2005-12-13\bin\nant.exe</executable>
+            <nologo>false</nologo>
+            <buildFile>NAnt.Build</buildFile>
+            <buildArgs>-D:version=</buildArgs>
+            <targetList>
+                <target>fxcop</target>
+                <!--<target>nunit</target>-->
+                <target>ncovernunit</target>
+                <target>doc-sdk</target>
+                <target>releaseFiles</target>
+                <target>cleanDebug</target>
+                <target>package</target>
+            </targetList>
+            <buildTimeoutSeconds>1200</buildTimeoutSeconds>
+        </nant>
+
+        <merge>
+            <files>
+                <file>Release\FxCop.Xml</file>
+                <!--<file>Release\ncover.xml</file>-->
+                <!--<file>Release\nunit.xml</file>-->
+            </files>
+        </merge>
+
+    </tasks>
+
+    <publishers>
+
+        <xmllogger />
+
+        <nant>
+            <executable>C:\Programme\nant-0.85-nightly-2005-12-13\bin\nant.exe</executable>
+            <nologo>false</nologo>
+            <buildFile>NAnt.Build</buildFile>
+            <targetList>
+                <target>cleanDebug</target>
+                <target>cleanRelease</target>
+            </targetList>
+            <buildTimeoutSeconds>1200</buildTimeoutSeconds>
+        </nant>
+
+    </publishers>
+
+</project>

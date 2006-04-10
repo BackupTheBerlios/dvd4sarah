@@ -1,0 +1,324 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{629D79BF-5E90-4211-8A8B-F2D9E993C221}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Softwarekueche.Dvd4Sarah.Controls</RootNamespace>
+    <AssemblyName>Dvd4Sarah.Controls</AssemblyName>
+    <MyType>Windows</MyType>
+    <OptionStrict>On</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\</OutputPath>
+    <DocumentationFile>Dvd4Sarah.xml</DocumentationFile>
+    <DefineConstants>_MYFORMS=True</DefineConstants>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>..\Release\</OutputPath>
+    <DocumentationFile>Dvd4Sarah.xml</DocumentationFile>
+    <DefineConstants>_MYFORMS=True</DefineConstants>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DotNetUC.Forms, Version=0.1.0.0, Culture=neutral, PublicKeyToken=9bd6653d13cff932, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\libs\DotNetUC.Forms.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetUC.Validation, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\libs\DotNetUC.Validation.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Drawing" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Windows.Forms" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Common\DateTimePickerAdapter.vb" />
+    <Compile Include="Dvd\AnsichtDvd.Designer.vb">
+      <DependentUpon>AnsichtDvd.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Dvd\AnsichtDvd.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Owner\AnsichtOwner.Designer.vb">
+      <DependentUpon>AnsichtOwner.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Owner\AnsichtOwner.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Fsk\AnsichtFsk.Designer.vb">
+      <DependentUpon>AnsichtFsk.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Fsk\AnsichtFsk.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Genre\AnsichtGenre.Designer.vb">
+      <DependentUpon>AnsichtGenre.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Genre\AnsichtGenre.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Verleih\AnsichtDistribute.Designer.vb">
+      <DependentUpon>AnsichtDistribute.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Verleih\AnsichtDistribute.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Dvd\EditDvdAdapter.vb" />
+    <Compile Include="Genre\EditGenreAdapter.vb" />
+    <Compile Include="Fsk\EditFskAdapter.vb" />
+    <Compile Include="Owner\EditOwnerAdapter.vb" />
+    <Compile Include="Fsk\ListFsk.Designer.vb">
+      <DependentUpon>ListFsk.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Fsk\ListFsk.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Genre\ListGenre.Designer.vb">
+      <DependentUpon>ListGenre.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Genre\ListGenre.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Genre\EditGenreDialog.Designer.vb">
+      <DependentUpon>EditGenreDialog.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Genre\EditGenreDialog.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Fsk\EditFskDialog.Designer.vb">
+      <DependentUpon>EditFskDialog.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Fsk\EditFskDialog.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Genre\EditGenre.Designer.vb">
+      <DependentUpon>EditGenre.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Genre\EditGenre.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Fsk\EditFsk.Designer.vb">
+      <DependentUpon>EditFsk.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Fsk\EditFsk.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Owner\EditOwner.Designer.vb">
+      <DependentUpon>EditOwner.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Owner\EditOwner.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Owner\EditOwnerDialog.Designer.vb">
+      <DependentUpon>EditOwnerDialog.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Owner\EditOwnerDialog.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Owner\ListOwner.Designer.vb">
+      <DependentUpon>ListOwner.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Owner\ListOwner.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Dvd\EditDvd.Designer.vb">
+      <DependentUpon>EditDvd.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Dvd\EditDvd.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Dvd\EditDvdDialog.Designer.vb">
+      <DependentUpon>EditDvdDialog.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Dvd\EditDvdDialog.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Common\Enums.vb" />
+    <Compile Include="Dvd\ListDvd.Designer.vb">
+      <DependentUpon>ListDvd.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Dvd\ListDvd.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Common\NumericUpDownAdapter.vb" />
+    <Compile Include="Common\SortEventArgs.vb" />
+    <Compile Include="Verleih\EditDistribute.Designer.vb">
+      <DependentUpon>EditDistribute.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Verleih\EditDistribute.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Verleih\EditDistributeAdapter.vb" />
+    <Compile Include="Verleih\ListDistribute.Designer.vb">
+      <DependentUpon>ListDistribute.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Verleih\ListDistribute.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Dvd\AnsichtDvd.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>AnsichtDvd.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Owner\AnsichtOwner.resx">
+      <DependentUpon>AnsichtOwner.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Fsk\AnsichtFsk.resx">
+      <DependentUpon>AnsichtFsk.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Genre\AnsichtGenre.resx">
+      <DependentUpon>AnsichtGenre.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Verleih\AnsichtDistribute.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>AnsichtDistribute.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Fsk\ListFsk.resx">
+      <DependentUpon>ListFsk.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Genre\ListGenre.resx">
+      <DependentUpon>ListGenre.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Genre\EditGenreDialog.resx">
+      <DependentUpon>EditGenreDialog.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Fsk\EditFskDialog.resx">
+      <DependentUpon>EditFskDialog.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Genre\EditGenre.resx">
+      <DependentUpon>EditGenre.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Fsk\EditFsk.resx">
+      <DependentUpon>EditFsk.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Owner\EditOwner.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>EditOwner.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Owner\EditOwnerDialog.resx">
+      <DependentUpon>EditOwnerDialog.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Owner\ListOwner.resx">
+      <DependentUpon>ListOwner.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dvd\EditDvd.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>EditDvd.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dvd\EditDvdDialog.resx">
+      <DependentUpon>EditDvdDialog.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dvd\ListDvd.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ListDvd.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Verleih\EditDistribute.resx">
+      <DependentUpon>EditDistribute.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Verleih\ListDistribute.resx">
+      <DependentUpon>ListDistribute.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\DataSources\Softwarekueche.Dvd4Sarah.BusinessObjects.Dvd.datasource" />
+    <None Include="My Project\DataSources\Softwarekueche.Dvd4Sarah.BusinessObjects.FSK.datasource" />
+    <None Include="My Project\DataSources\Softwarekueche.Dvd4Sarah.BusinessObjects.Genre.datasource" />
+    <None Include="My Project\DataSources\Softwarekueche.Dvd4Sarah.BusinessObjects.Owner.datasource" />
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Basisklassen\Basisklassen.vbproj">
+      <Project>{E9E28EB1-F3E1-4725-87FA-66B7B3DBD920}</Project>
+      <Name>Basisklassen</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BusinessObjects\BusinessObjects.vbproj">
+      <Project>{38404073-C908-46EE-B751-9836D9F0D0A9}</Project>
+      <Name>BusinessObjects</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Validation\Validation.vbproj">
+      <Project>{0E4AA9BA-93C2-4763-8398-D7F02379DA5B}</Project>
+      <Name>Validation</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
