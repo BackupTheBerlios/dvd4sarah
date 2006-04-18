@@ -19,12 +19,6 @@
     <!-- Externe Tools -->
     <property name="msbuild"
               value="${sysWinDir}\Microsoft.NET\Framework\v2.0.50727\msbuild.exe" />
-    <property name="fxcop"
-              value="${sysProgDir}\Microsoft FxCop 1.35\fxcopcmd.exe" />
-    <property name="nunit"
-              value="${sysProgDir}\NUnit-Net-2.0 2.2.6\bin\nunit-console.exe" />
-    <property name="ncover"
-              value="${sysProgDir}\NCover\ncover.console.exe" />
 
     <!-- Parameter für die weitere Verwendung -->
     <property name="author"      value="Thomas Mentzel"/>
@@ -53,22 +47,19 @@
 
     <!-- Target für "Erstellen" -->
     <target name="build" description="Erstellen des gesamten Projektes">
+
         <call target="sets" />
-        <call target="cleanDebug" />
-        <call target="cleanRelease" />
+        <call target="clean" />
 
         <call target="msbuild" />
-        <!--<call target="nunit" />-->
-        <!--<call target="ncovernunit" />-->
         <call target="doc-sdk"/>
         <call target="releaseFiles" />
         <call target="cleanDebug" />
         <call target="msisetup" />
         <call target="package" />
-        <call target="cleanRelease" />
     </target>
 
-    <target name="msisetupWrapper" description="Wrapper für MSI Setup">
+    <target name="msiSetupWrapper" description="Wrapper für MSI Setup">
         <call target="msisetup" />
     </target>
 
@@ -76,9 +67,8 @@
          Sub-Targets 
       ~~~~~~~~~~~~~-->
 
-    <target name="clean" description="Bereinigen des Solution Verzeichnisses">
-        <call target="cleanDebug" />
-        <call target="cleanRelease" />
+    <target name="clean" description="Bereinigen des Solution Verzeichnisses" 
+            depends="cleanDebug,cleanRelease">
     </target>
 
     <!-- Ausgeben von Parametern -->
@@ -104,33 +94,13 @@
         </exec>
     </target>
 
-    <!-- Aufrufen von NUnit und NCover (Wrapper)-->
-    <target name="nunit" description="Aufrufen von NUnit">
-        <exec program="${nunit}"
-              workingdir="${root}">
-            <arg value="${releasedir}\Tests.NUnit.dll" />
-            <arg value="/xml=${releasedir}\nunit.xml" />
-            <arg value="/nologo" />
-        </exec>
-    </target>
-
-    <!-- Aufrufen von NUnit und NCover -->
-    <target name="ncovernunit" description="Aufrufen von NCover mit NUnit">
-        <exec program="${ncover}"
-              workingdir="${root}">
-            <arg value="//l &quot;${releasedir}\ncover.log&quot;" />
-            <arg value="//x &quot;${releasedir}\ncover.xml&quot;" />
-            <arg value="&quot;${nunit}&quot; &quot;&quot;&quot;${releasedir}\Tests.NUnit.dll&quot;&quot;&quot; &quot;&quot;&quot;/xml=${releasedir}\nunit.xml&quot;&quot;&quot; /nologo" />
-        </exec>
-    </target>
-
     <!-- Verschiedene Dateien veröffentlichen -->
-    <target name="releaseFiles" description="Verschiedene Dateien veröffenltichen">
-        <copy   file="${root}\Doc\MSDN\${outname}-SDK.chm" todir="${releasedir}" />
-        <copy   file="${setupdir}\Handbuch.chm" todir="${releasedir}" />
-        <copy   file="${root}\MessageDialog.csv" todir="${releasedir}" />
-        <delete file="${releasedir}\Dvd4Sarah.exe.config" />
-        <copy   file="${root}\Dvd4Sarah.exe.config" todir="${releasedir}" />
+    <target name="releaseFiles" description="Verschiedene Dateien veröffenltichen" depends="msbuild,doc-sdk" >
+        <copy   failonerror="false" file="${root}\Doc\MSDN\${outname}-SDK.chm" todir="${releasedir}" />
+        <copy   failonerror="false" file="${setupdir}\Handbuch.chm" todir="${releasedir}" />
+        <copy   failonerror="false" file="${root}\MessageDialog.csv" todir="${releasedir}" />
+        <delete failonerror="false" file="${releasedir}\Dvd4Sarah.exe.config" />
+        <copy   failonerror="false" file="${root}\Dvd4Sarah.exe.config" todir="${releasedir}" />
     </target>
 
     <!-- Erstellen eines Paketes mit den notwenigen Dateien -->
@@ -183,18 +153,17 @@
     <!-- Bereinigen -->
     <target name="cleanDebug" description="Reinigen der Verzeichnisse">
         <foreach item="Folder" in="${root}" property="dirname">
-            <delete dir="${dirname}\bin" />
-            <delete dir="${dirname}\obj" />
+            <delete failonerror="false" dir="${dirname}\bin" />
+            <delete failonerror="false" dir="${dirname}\obj" />
         </foreach>
     </target>
 
     <!-- Bereinigen -->
     <target name="cleanRelease" description="Reinigen der Verzeichnisse">
-        <delete dir="${root}\Doc" />
-        <delete>
+        <delete failonerror="false" dir="${root}\Doc" />
+        <delete failonerror="false">
             <fileset basedir="${releasedir}">
                 <include name="*.*" />
-                <exclude name="db4o*" />
             </fileset>
         </delete>
     </target>

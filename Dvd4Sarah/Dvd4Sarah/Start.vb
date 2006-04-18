@@ -82,6 +82,9 @@ Public Class Start
     ''' Gibt eine GPL-Info auf der Konsole aus
     ''' </summary>
     Private Shared Sub GplOut()
+        ' TODO Kommentar entfernen
+        Exit Sub
+
         System.Console.WriteLine("<!-- ProgramName -->, Version <!-- ProgramVersion -->, ")
         System.Console.WriteLine("Copyright (C) <!-- ProgramYear -->  <!-- ProgramAuthor -->")
         System.Console.WriteLine("<!-- ProgramName --> comes with ABSOLUTELY NO WARRANTY")

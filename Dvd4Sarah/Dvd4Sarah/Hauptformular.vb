@@ -107,7 +107,7 @@ Public Class Hauptformular
         itm.Text = key
         itm.ImageKey = key
         itm.Group = grp
-        lsvAnsichten.Items.Add(itm)
+        ' TODO lsvAnsichten.Items.Add(itm)
 
     End Sub
 

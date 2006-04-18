@@ -20,12 +20,12 @@ Partial Class AnsichtDvd
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.pnlButtons = New System.Windows.Forms.Panel
+        Me.btnVerleihen = New System.Windows.Forms.Button
         Me.btnAnzeigen = New System.Windows.Forms.Button
         Me.btnLöschen = New System.Windows.Forms.Button
         Me.btnBearbeiten = New System.Windows.Forms.Button
         Me.btnNeu = New System.Windows.Forms.Button
         Me.oListDvd = New Softwarekueche.Dvd4Sarah.Controls.ListDvd
-        Me.btnVerleihen = New System.Windows.Forms.Button
         Me.pnlButtons.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -41,6 +41,15 @@ Partial Class AnsichtDvd
         Me.pnlButtons.Name = "pnlButtons"
         Me.pnlButtons.Size = New System.Drawing.Size(554, 34)
         Me.pnlButtons.TabIndex = 0
+        '
+        'btnVerleihen
+        '
+        Me.btnVerleihen.Location = New System.Drawing.Point(246, 6)
+        Me.btnVerleihen.Name = "btnVerleihen"
+        Me.btnVerleihen.Size = New System.Drawing.Size(75, 23)
+        Me.btnVerleihen.TabIndex = 8
+        Me.btnVerleihen.Text = "&Verleihen"
+        Me.btnVerleihen.UseVisualStyleBackColor = True
         '
         'btnAnzeigen
         '
@@ -88,15 +97,6 @@ Partial Class AnsichtDvd
         Me.oListDvd.Size = New System.Drawing.Size(554, 324)
         Me.oListDvd.Sort = ""
         Me.oListDvd.TabIndex = 1
-        '
-        'btnVerleihen
-        '
-        Me.btnVerleihen.Location = New System.Drawing.Point(246, 6)
-        Me.btnVerleihen.Name = "btnVerleihen"
-        Me.btnVerleihen.Size = New System.Drawing.Size(75, 23)
-        Me.btnVerleihen.TabIndex = 8
-        Me.btnVerleihen.Text = "&Verleihen"
-        Me.btnVerleihen.UseVisualStyleBackColor = True
         '
         'AnsichtDvd
         '

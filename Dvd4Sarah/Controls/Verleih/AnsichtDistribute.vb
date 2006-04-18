@@ -8,4 +8,5 @@ Public Class AnsichtDistribute
         ' Add any initialization after the InitializeComponent() call.
         oListDistribute.List = BusinessObjects.Distribute.List()
     End Sub
+
 End Class

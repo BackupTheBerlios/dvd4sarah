@@ -1,17 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 9.00
-# Visual Studio 2005
+# Visual Basic Express 2005
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Dvd4Sarah", "Dvd4Sarah\Dvd4Sarah.vbproj", "{4CD081EC-7E28-4152-B1DD-343602FD640F}"
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Basisklassen", "Basisklassen\Basisklassen.vbproj", "{E9E28EB1-F3E1-4725-87FA-66B7B3DBD920}"
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "BusinessObjects", "BusinessObjects\BusinessObjects.vbproj", "{38404073-C908-46EE-B751-9836D9F0D0A9}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{73339CA3-E265-4957-8680-8FEEFBF43447}"
-	ProjectSection(SolutionItems) = preProject
-		NAnt.Build = NAnt.Build
-		Setup\Setup.Build = Setup\Setup.Build
-	EndProjectSection
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Tests.NUnit", "Tests.NUnit\Tests.NUnit.vbproj", "{24C826DD-EF79-42CA-A689-BA1ED51347ED}"
 EndProject

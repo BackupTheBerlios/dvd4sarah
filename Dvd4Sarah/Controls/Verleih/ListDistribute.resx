@@ -128,7 +128,7 @@
     <value>Leiher</value>
   </data>
   <data name="LenderDataGridViewTextBoxColumn.Width" type="System.Int32, mscorlib">
-    <value>70</value>
+    <value>150</value>
   </data>
   <data name="LeihDatumDataGridViewTextBoxColumn.HeaderText" xml:space="preserve">
     <value>Datum</value>
@@ -148,7 +148,7 @@
     <value>0, 0</value>
   </data>
   <data name="Liste.Size" type="System.Drawing.Size, System.Drawing">
-    <value>376, 115</value>
+    <value>400, 115</value>
   </data>
   <data name="Liste.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -172,7 +172,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>376, 115</value>
+    <value>400, 115</value>
   </data>
   <data name="&gt;&gt;bndDistribute.Name" xml:space="preserve">
     <value>bndDistribute</value>
